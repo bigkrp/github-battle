@@ -1,4 +1,4 @@
-let React = require('react');
+import React from 'react';
 let ReactRouter = require('react-router');
 let Router = ReactRouter.Router;
 let Route = ReactRouter.Route;
