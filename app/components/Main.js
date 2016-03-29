@@ -1,4 +1,5 @@
-let React = require('react');
+import React from 'react';
+// let React = require('react');
 
 let Main = React.createClass({
     render(){
