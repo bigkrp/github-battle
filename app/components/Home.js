@@ -2,7 +2,7 @@ import React from 'react';
 import {transparentBg} from '../styles';
 import {Router, Link} from 'react-router';
 
-let Home = React.createClass({
+const Home = React.createClass({
     render(){
         return(
             <div className='jumbotron col-sm-12 text-center' style={transparentBg}>

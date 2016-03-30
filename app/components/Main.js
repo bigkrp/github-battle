@@ -1,7 +1,7 @@
 import React from 'react';
 // let React = require('react');
 
-let Main = React.createClass({
+const Main = React.createClass({
     render(){
         return(
             <div className='main-container'>
