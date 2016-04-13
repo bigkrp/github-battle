@@ -1,5 +1,6 @@
 import React from 'react';
 import ConfirmBattle from '../components/ConfirmBattle';
+import githubHelpers from '../utils/githubHelpers';
 
 export default class ConfirmBattleContainer extends React.Component {
     /* jshint ignore:start */
@@ -11,26 +12,64 @@ export default class ConfirmBattleContainer extends React.Component {
         playersInfo: []
     };
     /* jshint ignore:end */
-    componentWillMount() {
-        console.log('componentWillMount');
-    }
     componentDidMount() {
         const query = this.props.location.query;
-        console.log('componentDidMount');
-        // Fetch info from github then update state
+        console.log('this: ', this);
+        githubHelpers.getPlayersInfo([query.playerOne, query.playerTwo])
+            .then(function (players) {
+                this.setState({
+                    isLoading: false,
+                    playersInfo: [players[0], players[1]]
+                });
+            }.bind(this));
     }
-    componentWillReceiveProps(nextProps) {
-        console.log('componentWillReceiveProps');
+    constructor(props) {
+        super(props);
+
+        this.handleInitialBattle = function () {
+            console.log('this: ', this);
+            this.context.router.push({
+                pathname: '/results',
+                state: {
+                    playersInfo: this.state.playersInfo
+                }
+            });
+        }.bind(this);
     }
-    componentWillUnmount() {
-        console.log('componentWillUnmount');
-    }
+    // handleInitialBattle() {
+    //     console.log('this: ', this);
+    //     this.context.router.push({
+    //         pathname: '/results',
+    //         state: {
+    //             playersInfo: this.state.playersInfo
+    //         }
+    //     });
+    // }
     render() {
         return (
             /* jshint ignore:start */
-            <ConfirmBattle isLoading={this.state.isLoading}
+            <ConfirmBattle
+            isLoading={this.state.isLoading}
+            onInitialeBattle={this.handleInitialBattle}
             playersInfo={this.state.playersInfo} />
             /* jshint ignore:end */
         );
     }
 }
+// import React from 'react';
+
+// export default class ConfirmBattleContainer extends React.Component {
+//   static propTypes = {
+//     name: React.PropTypes.string,
+//   };
+
+//   constructor(props) {
+//     super(props);
+//   }
+
+//   render() {
+//     return (
+//       <div></div>
+//     );
+//   }
+// }
