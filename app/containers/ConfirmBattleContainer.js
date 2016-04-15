@@ -14,7 +14,7 @@ export default class ConfirmBattleContainer extends React.Component {
     /* jshint ignore:end */
     componentDidMount() {
         const query = this.props.location.query;
-        console.log('this: ', this);
+        
         githubHelpers.getPlayersInfo([query.playerOne, query.playerTwo])
             .then(function (players) {
                 this.setState({
