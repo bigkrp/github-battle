@@ -15,7 +15,7 @@ export default class ResultsContainer extends React.Component {
 
     componentDidMount() {
         console.log('this.props', this.props.location.state.playersInfo);
-        githubHelpers.battle(this.props.location.this.state.playersInfo)
+        githubHelpers.battle(this.props.location.state.playersInfo)
             .then(function ( scores ) {
                 this.setState({
                     scores: scores,

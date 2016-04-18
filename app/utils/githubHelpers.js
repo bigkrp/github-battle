@@ -12,20 +12,25 @@ function getRepos ( username ) {
     return axios.get('https://api.github.com/users/' + username + '/repos' + param + '&per_page=100');
 }
 function getTotalStars ( repos ) {
-    return repos.data.reduce(( prev, current ) => prev + current.stargazers_count);
+    // console.log('repos.data.reduce(( prev, current ) => prev + current.stargazers_count): ', repos.data.reduce(( prev, current ) => prev + current.stargazers_count));
+    return repos.data.reduce(( prev, current ) => prev + current.stargazers_count, 0);
 }
-function getPlayersData ( players ) {
-    return getRepos( players.login )
+function getPlayersData ( player ) {
+    return getRepos( player.login )
         .then(getTotalStars)
         .then((totalStars) => {
+            // console.log('totalStars', totalStars);
             return {
-                followers: players.followers,
+                followers: player.followers,
                 totalStars: totalStars
             };
         });
 }
 function calculateScores ( players ) {
-
+    return [
+        players[0].followers * 3 + players[0].totalStars,
+        players[1].followers * 3 + players[1].totalStars
+    ];
 }
 
 let helpers = {
@@ -40,7 +45,12 @@ let helpers = {
             });
     },
     battle ( players ) {
+        let playerOneData = getPlayersData(players[0]),
+            playerTwoData = getPlayersData(players[1]);
 
+        return axios.all([playerOneData, playerTwoData])
+            .then(calculateScores)
+            .catch((err) => console.log('Error in getPlayersInfo: ', err));
     }
 };
 

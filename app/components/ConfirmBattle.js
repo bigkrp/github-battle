@@ -2,21 +2,17 @@ import React from 'react';
 import {Link} from 'react-router';
 import UserDetails from './UserDetails';
 import UserDetailsWrapper from './UserDetailsWrapper';
+import MainContainer from './MainContainer';
 import styles from '../styles';
+import Loading from '../components/Loading';
 
 const PropTypes = React.PropTypes;
-
-function puke( object ) {
-    /* jshint ignore:start */
-    return <pre>{JSON.stringify(object, null, ' ')}</pre>
-    /* jshint ignore:end */
-}
 
 function ConfirmBattle ( props ) {
     /* jshint ignore:start */
     return props.isLoading === true
-        ? <p> LOADING! </p>
-        : <div className="jubmotron col-sm-12 text-center" style={styles.transparentBg}>
+        ? <Loading speed={800} text='Waiting' />
+        : <MainContainer>
             <h1>Confirm Players</h1>
             <div className="col-sm-8 col-sm-offset-2">
                 <UserDetailsWrapper header='Player One'>
@@ -39,7 +35,7 @@ function ConfirmBattle ( props ) {
                     </Link>
                 </div>
             </div>
-        </div>
+        </MainContainer>
     /* jshint ignore:end */
 }
 
