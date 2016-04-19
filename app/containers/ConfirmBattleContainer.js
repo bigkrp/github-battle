@@ -36,15 +36,6 @@ export default class ConfirmBattleContainer extends React.Component {
             });
         }.bind(this);
     }
-    // handleInitialBattle() {
-    //     console.log('this: ', this);
-    //     this.context.router.push({
-    //         pathname: '/results',
-    //         state: {
-    //             playersInfo: this.state.playersInfo
-    //         }
-    //     });
-    // }
     render() {
         return (
             /* jshint ignore:start */
@@ -56,20 +47,3 @@ export default class ConfirmBattleContainer extends React.Component {
         );
     }
 }
-// import React from 'react';
-
-// export default class ConfirmBattleContainer extends React.Component {
-//   static propTypes = {
-//     name: React.PropTypes.string,
-//   };
-
-//   constructor(props) {
-//     super(props);
-//   }
-
-//   render() {
-//     return (
-//       <div></div>
-//     );
-//   }
-// }

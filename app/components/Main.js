@@ -1,13 +1,21 @@
 import React from 'react';
-// let React = require('react');
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import '../main.css';
 
 const Main = React.createClass({
     render(){
-        return(
+        /* jshint ignore:start */
+        return (
             <div className='main-container'>
-                {this.props.children}
+                <ReactCSSTransitionGroup
+                    transitionName='appear'
+                    transitionEnterTimeout={200}
+                    transitionLeaveTimeout={200}>
+                    {React.cloneElement(this.props.children, {key: this.props.location.pathname})}
+                </ReactCSSTransitionGroup>
             </div>
         );
+        /* jshint ignore:end */
     }
 });
 
